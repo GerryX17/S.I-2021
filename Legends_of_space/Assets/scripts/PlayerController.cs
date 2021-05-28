@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
         float horizontalInput = 0f, verticalInput = 0f;
         current_position = transform.position;
 
+
         if (current_position.z != last_position.z)
         {
             verticalInput = current_position.z - last_position.z;
@@ -35,8 +36,7 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        Vector3 movementDirection = new Vector3(horizontalInput, 0, verticalInput);
-        //movementDirection.Normalize();
+        Vector3 movementDirection = new Vector3(horizontalInput, 0.0f, verticalInput);
 
         transform.Translate(movementDirection * speed * Time.deltaTime, Space.World);
 

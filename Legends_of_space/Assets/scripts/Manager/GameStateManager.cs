@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿/*
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,7 +16,7 @@ public class GameStateManager : MonoBehaviour
     public int enemyDropped; // 3
 
     public int enemyDroppedBeforeGameOver; // 4
-    public EnemySpawner enemySpawner; // 5
+    //public EnemySpawner enemySpawner; // 5
                                       // Start is called before the first frame update
                                       // Start is called before the first frame update
     void Awake()
@@ -34,7 +35,7 @@ public class GameStateManager : MonoBehaviour
     private void GameOver()
     {
         enemySpawner.canSpawn = false; // 1
-        enemySpawner.DestroyAllEnemy(); // 2
+        //enemySpawner.DestroyAllEnemy(); // 2
     }
 
     public void DroppedEnemy()
@@ -53,3 +54,5 @@ public class GameStateManager : MonoBehaviour
         
     }
 }
+
+ */
