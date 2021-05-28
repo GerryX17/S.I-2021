@@ -12,17 +12,17 @@ public class EnemySpawner : MonoBehaviour
     private List<GameObject> enemyList = new List<GameObject>(); // 5
 
     //public TextMeshProUGUI countText;
-    public GameObject winTextObject;
+    //public GameObject winTextObject;
     //public GameObject loseTextObject;
-    public GameObject restartButton;
+    //public GameObject restartButton;
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(SpawnRoutine());
         count = 0;
         //countText.text = "Count: " + count.ToString();
-        restartButton.gameObject.SetActive(false);
-        winTextObject.SetActive(false);
+        //restartButton.gameObject.SetActive(false);
+        //winTextObject.SetActive(false);
         //loseTextObject.SetActive(false);
     }
 
@@ -35,9 +35,9 @@ public class EnemySpawner : MonoBehaviour
     private void SpawnEnemy()
     {
         Vector3 randomPosition = enemySpawnPositions[Random.Range(0, enemySpawnPositions.Count)].position; // 1
-        GameObject sheep = Instantiate(enemyPrefab, randomPosition, enemyPrefab.transform.rotation); // 2
-        enemyList.Add(sheep); // 3
-        sheep.GetComponent<Enemy>().SetSpawner(this); // 4
+        GameObject enemy = Instantiate(enemyPrefab, randomPosition, enemyPrefab.transform.rotation); // 2
+        enemyList.Add(enemy); // 3
+        enemy.GetComponent<Enemy>().SetSpawner(this); // 4
     }
     private IEnumerator SpawnRoutine() // 1
     {
@@ -47,7 +47,7 @@ public class EnemySpawner : MonoBehaviour
             yield return new WaitForSeconds(timeBetweenSpawns); // 4
         }
     }
-    public void DestroyAllSheep()
+    public void DestroyAllEnemy()
     {
         enemyList.Clear();
     }
