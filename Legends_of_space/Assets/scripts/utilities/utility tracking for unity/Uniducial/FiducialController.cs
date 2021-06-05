@@ -147,22 +147,44 @@ public class FiducialController : MonoBehaviour
                 //keyboard commands to test
                 if (MarkerID == 0)
                 {
+                    Vector3 t = transform.position;
+
                     if (Input.GetKey(KeyCode.UpArrow))
                     {
-                        transform.position += Vector3.forward*0.5f;
+                        Vector3 forward = Vector3.forward * 0.5f;
+                        t += forward;
                     }
                     if (Input.GetKey(KeyCode.DownArrow))
                     {
-                        transform.position += Vector3.forward * -0.5f;
-                    } 
+                        Vector3 backward = Vector3.forward * -0.5f;
+                        t += backward;
+                    }
                     if (Input.GetKey(KeyCode.RightArrow))
                     {
-                        transform.position += Vector3.right * 0.5f;
+                        Vector3 right = Vector3.right * 0.5f;
+                        t += right;
                     }
                     if (Input.GetKey(KeyCode.LeftArrow))
                     {
-                        transform.position += Vector3.right * -0.5f;
-                    } 
+                        Vector3 left = Vector3.right * -0.5f;
+                        t += left;
+                    }
+
+                    if (t.x >= 96.0f || t.x <= 4.0f)
+                    {
+                        t.x = transform.position.x;
+                    }
+
+                    if (t.z >= 96.0f || t.z <= 4.0f)
+                    {
+                        t.z = transform.position.z;
+                    }
+
+                    if (t != transform.position)
+                    {
+                        transform.position = t;
+                    }
+
                 }
                 if (MarkerID == 1)
                 {
@@ -182,24 +204,47 @@ public class FiducialController : MonoBehaviour
                     {
                         transform.position += Vector3.right * -0.5f;
                     }
+
                 }
                 if (MarkerID == 2)
                 {
+
+                    Vector3 t = transform.position;
+
                     if (Input.GetKey(KeyCode.W))
                     {
-                        transform.position += Vector3.forward * 0.5f;
+                        Vector3 forward = Vector3.forward * 0.5f;
+                        t += forward;
                     }
                     if (Input.GetKey(KeyCode.S))
                     {
-                        transform.position += Vector3.forward * -0.5f;
+                        Vector3 backward = Vector3.forward * -0.5f;
+                        t += backward;
                     }
                     if (Input.GetKey(KeyCode.D))
                     {
-                        transform.position += Vector3.right * 0.5f;
+                        Vector3 right = Vector3.right * 0.5f;
+                        t += right;
                     }
                     if (Input.GetKey(KeyCode.A))
                     {
-                        transform.position += Vector3.right * -0.5f;
+                        Vector3 left = Vector3.right * -0.5f;
+                        t += left;
+                    }
+
+                    if (t.x >= 96.0f || t.x <= 4.0f)
+                    {
+                        t.x = transform.position.x;
+                    }
+
+                    if (t.z >= 96.0f || t.z <= 4.0f)
+                    {
+                        t.z = transform.position.z;
+                    }
+
+                    if (t != transform.position)
+                    {
+                        transform.position = t;
                     }
                 }
                 if (MarkerID == 3)

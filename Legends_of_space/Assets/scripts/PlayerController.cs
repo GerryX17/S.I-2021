@@ -35,7 +35,6 @@ public class PlayerController : MonoBehaviour
             last_position = current_position;
         }
 
-
         Vector3 movementDirection = new Vector3(horizontalInput, 0.0f, verticalInput);
 
         transform.Translate(movementDirection * speed * Time.deltaTime, Space.World);
