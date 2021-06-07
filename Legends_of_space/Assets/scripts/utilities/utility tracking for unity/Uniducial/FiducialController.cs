@@ -28,6 +28,10 @@ using UnityEngine.UI;
 
 public class FiducialController : MonoBehaviour
 {
+    //  OUR ADDITION TO THE CLASS VARIABLES -------------------------------------------
+    public bool fighting = false;
+    // --------------------------------------------------------------------------------
+
     public int MarkerID = 0;
 
     public enum RotationAxis { Forward, Back, Up, Down, Left, Right };
@@ -142,128 +146,131 @@ public class FiducialController : MonoBehaviour
             }
             else
             {
-                //activate markers
-                transform.GetChild(0).gameObject.SetActive(true);
-                //keyboard commands to test
-                if (MarkerID == 0)
+                if (fighting == false)
                 {
-                    Vector3 t = transform.position;
+                    //activate markers
+                    transform.GetChild(0).gameObject.SetActive(true);
+                    //keyboard commands to test
+                    if (MarkerID == 0)
+                    {
+                        Vector3 t = transform.position;
 
-                    if (Input.GetKey(KeyCode.UpArrow))
-                    {
-                        Vector3 forward = Vector3.forward * 0.5f;
-                        t += forward;
-                    }
-                    if (Input.GetKey(KeyCode.DownArrow))
-                    {
-                        Vector3 backward = Vector3.forward * -0.5f;
-                        t += backward;
-                    }
-                    if (Input.GetKey(KeyCode.RightArrow))
-                    {
-                        Vector3 right = Vector3.right * 0.5f;
-                        t += right;
-                    }
-                    if (Input.GetKey(KeyCode.LeftArrow))
-                    {
-                        Vector3 left = Vector3.right * -0.5f;
-                        t += left;
-                    }
+                        if (Input.GetKey(KeyCode.UpArrow))
+                        {
+                            Vector3 forward = Vector3.forward * 0.5f;
+                            t += forward;
+                        }
+                        if (Input.GetKey(KeyCode.DownArrow))
+                        {
+                            Vector3 backward = Vector3.forward * -0.5f;
+                            t += backward;
+                        }
+                        if (Input.GetKey(KeyCode.RightArrow))
+                        {
+                            Vector3 right = Vector3.right * 0.5f;
+                            t += right;
+                        }
+                        if (Input.GetKey(KeyCode.LeftArrow))
+                        {
+                            Vector3 left = Vector3.right * -0.5f;
+                            t += left;
+                        }
 
-                    if (t.x >= 96.0f || t.x <= 4.0f)
-                    {
-                        t.x = transform.position.x;
-                    }
+                        if (t.x >= 96.0f || t.x <= 4.0f)
+                        {
+                            t.x = transform.position.x;
+                        }
 
-                    if (t.z >= 96.0f || t.z <= 4.0f)
-                    {
-                        t.z = transform.position.z;
-                    }
+                        if (t.z >= 96.0f || t.z <= 4.0f)
+                        {
+                            t.z = transform.position.z;
+                        }
 
-                    if (t != transform.position)
-                    {
-                        transform.position = t;
-                    }
+                        if (t != transform.position)
+                        {
+                            transform.position = t;
+                        }
 
-                }
-                if (MarkerID == 1)
-                {
-                    if (Input.GetKey(KeyCode.Keypad8))
-                    {
-                        transform.position += Vector3.forward * 0.5f;
                     }
-                    if (Input.GetKey(KeyCode.Keypad2))
+                    if (MarkerID == 1)
                     {
-                        transform.position += Vector3.forward * -0.5f;
-                    }
-                    if (Input.GetKey(KeyCode.Keypad6))
-                    {
-                        transform.position += Vector3.right * 0.5f;
-                    }
-                    if (Input.GetKey(KeyCode.Keypad4))
-                    {
-                        transform.position += Vector3.right * -0.5f;
-                    }
+                        if (Input.GetKey(KeyCode.Keypad8))
+                        {
+                            transform.position += Vector3.forward * 0.5f;
+                        }
+                        if (Input.GetKey(KeyCode.Keypad2))
+                        {
+                            transform.position += Vector3.forward * -0.5f;
+                        }
+                        if (Input.GetKey(KeyCode.Keypad6))
+                        {
+                            transform.position += Vector3.right * 0.5f;
+                        }
+                        if (Input.GetKey(KeyCode.Keypad4))
+                        {
+                            transform.position += Vector3.right * -0.5f;
+                        }
 
-                }
-                if (MarkerID == 2)
-                {
+                    }
+                    if (MarkerID == 2)
+                    {
 
-                    Vector3 t = transform.position;
+                        Vector3 t = transform.position;
 
-                    if (Input.GetKey(KeyCode.W))
-                    {
-                        Vector3 forward = Vector3.forward * 0.5f;
-                        t += forward;
-                    }
-                    if (Input.GetKey(KeyCode.S))
-                    {
-                        Vector3 backward = Vector3.forward * -0.5f;
-                        t += backward;
-                    }
-                    if (Input.GetKey(KeyCode.D))
-                    {
-                        Vector3 right = Vector3.right * 0.5f;
-                        t += right;
-                    }
-                    if (Input.GetKey(KeyCode.A))
-                    {
-                        Vector3 left = Vector3.right * -0.5f;
-                        t += left;
-                    }
+                        if (Input.GetKey(KeyCode.W))
+                        {
+                            Vector3 forward = Vector3.forward * 0.5f;
+                            t += forward;
+                        }
+                        if (Input.GetKey(KeyCode.S))
+                        {
+                            Vector3 backward = Vector3.forward * -0.5f;
+                            t += backward;
+                        }
+                        if (Input.GetKey(KeyCode.D))
+                        {
+                            Vector3 right = Vector3.right * 0.5f;
+                            t += right;
+                        }
+                        if (Input.GetKey(KeyCode.A))
+                        {
+                            Vector3 left = Vector3.right * -0.5f;
+                            t += left;
+                        }
 
-                    if (t.x >= 96.0f || t.x <= 4.0f)
-                    {
-                        t.x = transform.position.x;
-                    }
+                        if (t.x >= 96.0f || t.x <= 4.0f)
+                        {
+                            t.x = transform.position.x;
+                        }
 
-                    if (t.z >= 96.0f || t.z <= 4.0f)
-                    {
-                        t.z = transform.position.z;
-                    }
+                        if (t.z >= 96.0f || t.z <= 4.0f)
+                        {
+                            t.z = transform.position.z;
+                        }
 
-                    if (t != transform.position)
-                    {
-                        transform.position = t;
+                        if (t != transform.position)
+                        {
+                            transform.position = t;
+                        }
                     }
-                }
-                if (MarkerID == 3)
-                {
-                    if (Input.GetKey(KeyCode.I))
+                    if (MarkerID == 3)
                     {
-                        transform.position += Vector3.forward * 0.5f;
-                    }
-                    if (Input.GetKey(KeyCode.K))
-                    {
-                        transform.position += Vector3.forward * -0.5f;
-                    }
-                    if (Input.GetKey(KeyCode.L))
-                    {
-                        transform.position += Vector3.right * 0.5f;
-                    }
-                    if (Input.GetKey(KeyCode.J))
-                    {
-                        transform.position += Vector3.right * -0.5f;
+                        if (Input.GetKey(KeyCode.I))
+                        {
+                            transform.position += Vector3.forward * 0.5f;
+                        }
+                        if (Input.GetKey(KeyCode.K))
+                        {
+                            transform.position += Vector3.forward * -0.5f;
+                        }
+                        if (Input.GetKey(KeyCode.L))
+                        {
+                            transform.position += Vector3.right * 0.5f;
+                        }
+                        if (Input.GetKey(KeyCode.J))
+                        {
+                            transform.position += Vector3.right * -0.5f;
+                        }
                     }
                 }
             }

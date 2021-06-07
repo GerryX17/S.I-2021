@@ -411,7 +411,7 @@ PrefabInstance:
     - target: {fileID: 746186707522591666, guid: cd1cb5635f8dbe649adff6525a31cfd3,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.38268343
+      value: 0.42261827
       objectReference: {fileID: 0}
     - target: {fileID: 746186707522591666, guid: cd1cb5635f8dbe649adff6525a31cfd3,
         type: 3}
@@ -421,7 +421,7 @@ PrefabInstance:
     - target: {fileID: 746186707522591666, guid: cd1cb5635f8dbe649adff6525a31cfd3,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.92387956
+      value: 0.9063079
       objectReference: {fileID: 0}
     - target: {fileID: 746186707522591666, guid: cd1cb5635f8dbe649adff6525a31cfd3,
         type: 3}
@@ -436,7 +436,7 @@ PrefabInstance:
     - target: {fileID: 746186707522591666, guid: cd1cb5635f8dbe649adff6525a31cfd3,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 135
+      value: 130
       objectReference: {fileID: 0}
     - target: {fileID: 746186707522591666, guid: cd1cb5635f8dbe649adff6525a31cfd3,
         type: 3}
@@ -1005,11 +1005,11 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1476403150}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 32
-  m_Center: {x: 0.0000019073486, y: 0, z: -0.0000038146973}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1476403154
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1024,6 +1024,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tagPlayer1: Player1
   tagPlayer2: Player2
+  redLaserPrefab: {fileID: 406743321076758796, guid: a68e88db2e0ea60409afde8308b1d183,
+    type: 3}
+  blueLaserPrefab: {fileID: 4764539825274370455, guid: ff81a1464eb38304fa3c4dae075185f2,
+    type: 3}
+  enemyPrefab: {fileID: 353171123748158629, guid: 2da5e93a71f911749ac07db6a4fe477a,
+    type: 3}
+  enemySpawnPositions:
+  - {fileID: 1732368861}
+  timeBetweenSpawns: 10
 --- !u!850595691 &1521558571
 LightingSettings:
   m_ObjectHideFlags: 0
@@ -1102,7 +1111,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 479976, guid: 35415bd24cbf1304fb8f04ba7d00afb2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 479976, guid: 35415bd24cbf1304fb8f04ba7d00afb2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1242,6 +1251,9 @@ MonoBehaviour:
   - {fileID: 1039248044}
   - {fileID: 1237987394}
   - {fileID: 2087450548}
+  canSpawn: 0
+  lastTimeAsteroidSpawned: 0
+  timeBetweenSpawns: 3
 --- !u!1 &1592249353
 GameObject:
   m_ObjectHideFlags: 0
