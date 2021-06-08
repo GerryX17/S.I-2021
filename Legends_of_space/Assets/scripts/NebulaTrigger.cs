@@ -23,7 +23,9 @@ public class NebulaTrigger : MonoBehaviour
     public GameObject blueLaserPrefab;
 
     public GameObject enemyPrefab; 
-    public List<Transform> enemySpawnPositions = new List<Transform>(); 
+    public List<Transform> enemySpawnPositions = new List<Transform>();
+
+    private GameObject enemy;
 
     public float timeBetweenSpawns;
 
@@ -77,7 +79,7 @@ public class NebulaTrigger : MonoBehaviour
     private void spawnEnemy()
     {
         Vector3 randomPosition = enemySpawnPositions[Random.Range(0, enemySpawnPositions.Count)].position;
-        GameObject enemy = Instantiate(enemyPrefab, randomPosition, enemyPrefab.transform.rotation);
+        enemy = Instantiate(enemyPrefab, randomPosition, enemyPrefab.transform.rotation);
         enemyList.Add(enemy);
     }
 
@@ -98,11 +100,14 @@ public class NebulaTrigger : MonoBehaviour
 
     private void shootAtEnemy()
     {
-        Instantiate(redLaserPrefab, player1);
-        Instantiate(blueLaserPrefab, player2);
+        Instantiate(redLaserPrefab, player1.position, Quaternion.identity);
+        Instantiate(blueLaserPrefab, player2.position, Quaternion.identity);
+        SoundManager.Instance.PlayShootClip();
 
         // los disparos avanzan y paran al llegar a nebula_pos y luego hacemos animación de explosión
-
+        Destroy(enemy, 5);
+        enemyList.Remove(enemy);
+        SoundManager.Instance.PlayShipHitClip();
     }
 
     private void playersCanMove()
