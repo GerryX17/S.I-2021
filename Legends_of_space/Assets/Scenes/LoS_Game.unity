@@ -141,8 +141,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2d9820ed2bfc2b408b0ee68e03ffa4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  speed: 0.5
   rotationSpeed: 200
+  threshold: 0.1
 --- !u!1 &170076733
 GameObject:
   m_ObjectHideFlags: 0
@@ -252,7 +253,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 434884, guid: a3e9bd2d875ca52428801bc00f70c240, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 434884, guid: a3e9bd2d875ca52428801bc00f70c240, type: 3}
       propertyPath: m_LocalPosition.z
@@ -376,7 +377,7 @@ PrefabInstance:
     - target: {fileID: 746186705940698877, guid: cd1cb5635f8dbe649adff6525a31cfd3,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 746186705940698879, guid: cd1cb5635f8dbe649adff6525a31cfd3,
         type: 3}
@@ -401,7 +402,7 @@ PrefabInstance:
     - target: {fileID: 746186707522591666, guid: cd1cb5635f8dbe649adff6525a31cfd3,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 746186707522591666, guid: cd1cb5635f8dbe649adff6525a31cfd3,
         type: 3}
@@ -442,6 +443,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 746186707522591666, guid: cd1cb5635f8dbe649adff6525a31cfd3,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 746186707522591666, guid: cd1cb5635f8dbe649adff6525a31cfd3,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 746186707522591666, guid: cd1cb5635f8dbe649adff6525a31cfd3,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 746186707522591667, guid: cd1cb5635f8dbe649adff6525a31cfd3,
         type: 3}
@@ -556,7 +572,7 @@ MonoBehaviour:
   y: 0
   z: 0
   t: {fileID: 625074995}
-  speed: 0.05
+  speed: 0.01
 --- !u!1 &637812970 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6137497491829922050, guid: a2aaaa094093a294aade9f5a5ce62bbb,
@@ -575,8 +591,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2d9820ed2bfc2b408b0ee68e03ffa4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  speed: 0.5
   rotationSpeed: 200
+  threshold: 0.1
 --- !u!1001 &684669650
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -926,6 +943,7 @@ MonoBehaviour:
   enemySpawnPositions:
   - {fileID: 1732368861}
   timeBetweenSpawns: 0
+  enemyList: []
 --- !u!1 &1343265811
 GameObject:
   m_ObjectHideFlags: 0
@@ -997,19 +1015,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1543606462}
   m_PrefabAsset: {fileID: 0}
---- !u!135 &1476403153
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1476403150}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 32
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1476403154
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1028,6 +1033,8 @@ MonoBehaviour:
     type: 3}
   blueLaserPrefab: {fileID: 4764539825274370455, guid: ff81a1464eb38304fa3c4dae075185f2,
     type: 3}
+  redRB: {fileID: -5960109929333773265, guid: a68e88db2e0ea60409afde8308b1d183, type: 3}
+  blueRB: {fileID: -6297808549458583183, guid: ff81a1464eb38304fa3c4dae075185f2, type: 3}
   enemyPrefab: {fileID: 353171123748158629, guid: 2da5e93a71f911749ac07db6a4fe477a,
     type: 3}
   enemySpawnPositions:
@@ -1548,7 +1555,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 457454, guid: d45cd38fab4caff4fb282fac230099ff, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 457454, guid: d45cd38fab4caff4fb282fac230099ff, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1585,6 +1592,18 @@ PrefabInstance:
     - target: {fileID: 457454, guid: d45cd38fab4caff4fb282fac230099ff, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 457454, guid: d45cd38fab4caff4fb282fac230099ff, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 457454, guid: d45cd38fab4caff4fb282fac230099ff, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 457454, guid: d45cd38fab4caff4fb282fac230099ff, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d45cd38fab4caff4fb282fac230099ff, type: 3}
@@ -1879,8 +1898,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootClip: {fileID: 8300000, guid: 2913331b88c6f90479f164a520660315, type: 3}
-  shipHitClip: {fileID: 8300000, guid: 6d9d55712b4d36245a71c28635853006, type: 3}
-  shipDroppedClip: {fileID: 0}
+  enemyHitClip: {fileID: 8300000, guid: 6d9d55712b4d36245a71c28635853006, type: 3}
+  asteroidPushClip: {fileID: 8300000, guid: 71d8b4d6aed7ddc4bac4587dfb502d60, type: 3}
 --- !u!1 &2006488402
 GameObject:
   m_ObjectHideFlags: 0
@@ -2312,7 +2331,7 @@ PrefabInstance:
     - target: {fileID: 6137497491829922048, guid: a2aaaa094093a294aade9f5a5ce62bbb,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6137497491829922048, guid: a2aaaa094093a294aade9f5a5ce62bbb,
         type: 3}

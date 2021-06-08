@@ -22,6 +22,7 @@ TagManager:
   - Reward
   - objectiveTriangle
   - Asteroid
+  - RedPlayer
   layers:
   - Default
   - TransparentFX

@@ -28,7 +28,9 @@ public class Asteroid : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isDestroyed) { 
+        if (isDestroyed) {
+
+
             if (percentScaled < 1f)
             {
                 rb.AddRelativeForce(player_forward * speed * Time.deltaTime);
@@ -36,6 +38,8 @@ public class Asteroid : MonoBehaviour
                 percentScaled += Time.deltaTime / timeToDestroy;
                 float scale = Mathf.Lerp(startScale, targetScale, percentScaled);
                 transform.localScale = new Vector3(scale, scale, scale);
+
+                
             }
         }
     }
@@ -44,6 +48,9 @@ public class Asteroid : MonoBehaviour
     {
         if( other.CompareTag("Player1") || other.CompareTag("Player2") )
         {
+
+            SoundManager.Instance.PlayAsteroidHitClip();
+
             player_forward = other.transform.forward;
 
             Destroy(this.gameObject, timeToDestroy);

@@ -5,37 +5,35 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
     // Start is called before the first frame update
-    public static SoundManager Instance; // 1
+    public static SoundManager Instance;
 
-    public AudioClip shootClip; // 2
-    public AudioClip shipHitClip; // 3
-    public AudioClip shipDroppedClip; // 4
+    public AudioClip shootClip;
+    public AudioClip enemyHitClip;
+    public AudioClip asteroidPushClip;
 
-    private Vector3 cameraPosition; // 5
+    private Vector3 cameraPosition;
     // Start is called before the first frame update
     void Awake()
     {
         Instance = this; // 1
-        cameraPosition = Camera.main.transform.position; // 2
+        cameraPosition = Camera.main.transform.position;
     }
     public void PlayShootClip()
     {
         PlaySound(shootClip);
     }
 
-    public void PlayShipHitClip()
+    public void PlayEnemyHitClip()
     {
-        PlaySound(shipHitClip);
+        PlaySound(enemyHitClip);
     }
 
-
-    //BORRAR EL DROPPED PARA MAS ADELANTEE !!!
-    public void PlayShipDroppedClip()
+    public void PlayAsteroidHitClip()
     {
-        PlaySound(shipDroppedClip);
+        PlaySound(asteroidPushClip);
     }
-    private void PlaySound(AudioClip clip) // 1
+    private void PlaySound(AudioClip clip)
     {
-        AudioSource.PlayClipAtPoint(clip, cameraPosition); // 2
+        AudioSource.PlayClipAtPoint(clip, cameraPosition, 0.4f);
     }
 }

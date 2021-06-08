@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     public float speed;
     public float rotationSpeed;
 
+    public float threshold;
+
     private Vector3 last_position;
     private Vector3 current_position;
 
@@ -37,9 +39,21 @@ public class PlayerController : MonoBehaviour
 
         Vector3 movementDirection = new Vector3(horizontalInput, 0.0f, verticalInput);
 
-        transform.Translate(movementDirection * speed * Time.deltaTime, Space.World);
+        Vector3 finalDirection = Vector3.zero;
 
-        if (movementDirection != Vector3.zero)
+        float x_offset_absolute, z_offset_absolute;
+
+        x_offset_absolute = Mathf.Abs(movementDirection.x);
+        z_offset_absolute = Mathf.Abs(movementDirection.z);
+
+        if (x_offset_absolute  > threshold && z_offset_absolute > threshold)
+            finalDirection = new Vector3(horizontalInput, 0.0f, verticalInput);
+        else if (x_offset_absolute > threshold)
+            finalDirection = new Vector3(horizontalInput, 0.0f, 0.0f);
+        else if (z_offset_absolute > threshold)
+            finalDirection = new Vector3(0.0f, 0.0f, verticalInput);
+
+        if ( finalDirection != Vector3.zero )
         {
             Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);

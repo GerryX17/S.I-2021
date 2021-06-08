@@ -13,6 +13,8 @@ public class NebulaTrigger : MonoBehaviour
     private Transform nebula;
     private Vector3 nebula_pos;
 
+    private bool shooting = false;
+
     private Transform player1;
     private Transform player2;
 
@@ -21,6 +23,12 @@ public class NebulaTrigger : MonoBehaviour
 
     public GameObject redLaserPrefab;
     public GameObject blueLaserPrefab;
+
+    public Rigidbody redRB;
+    public Rigidbody blueRB;
+
+    private GameObject redLaser;
+    private GameObject blueLaser;
 
     public GameObject enemyPrefab; 
     public List<Transform> enemySpawnPositions = new List<Transform>();
@@ -65,15 +73,31 @@ public class NebulaTrigger : MonoBehaviour
         {
             hasSpawned = true;
 
-            Invoke("spawnEnemy", 1);
+            Invoke( "spawnEnemy", 0.5f);
 
-            lookAtEnemy();
+            Invoke( "lookAtEnemy", 0.5f);
 
-            shootAtEnemy();
+            Invoke( "shootAtEnemy", 1.2f);
 
-            Invoke("playersCanMove", 3);
+            Invoke("removeEnemy", 2.5f);
+
+            Invoke( "playersCanMove", 3.5f);
         }
 
+    }
+
+    private void FixedUpdate()
+    {
+        if (shooting)
+        {
+            Vector3 enemyPosition = new Vector3(nebula_pos.x, 0.0f, nebula_pos.z);
+            
+            Vector3 redTargetPosition = enemyPosition - redLaser.transform.position;
+            redLaser.GetComponent<Rigidbody>().AddForce( redTargetPosition * 55 * Time.fixedDeltaTime );
+
+            Vector3 blueTargetPosition = enemyPosition - blueLaser.transform.position;
+            blueLaser.GetComponent<Rigidbody>().AddForce( blueTargetPosition * 55 * Time.fixedDeltaTime );
+        }
     }
 
     private void spawnEnemy()
@@ -85,29 +109,69 @@ public class NebulaTrigger : MonoBehaviour
 
     private void lookAtEnemy()
     {
-        // player1 stop moving, look at enemy and shoot at it
+        // player1 stop moving
         GameObject p1 = GameObject.FindGameObjectsWithTag(tagPlayer1)[0];
         fc1 = p1.GetComponent<FiducialController>();
         fc1.fighting = true;
-        fc1.transform.LookAt(nebula, new Vector3(0, 1, 0));
 
-        // player2 stop moving, look at enemy and shoot at it
+        // player2 stop moving
         GameObject p2 = GameObject.FindGameObjectsWithTag(tagPlayer2)[0];
         fc2 = p2.GetComponent<FiducialController>();
         fc2.fighting = true;
-        fc2.transform.LookAt(nebula, new Vector3(0, 1, 0));
+
+        // target is enemy, look at it
+        Vector3 enemyPosition = new Vector3(nebula_pos.x, 0.0f, nebula_pos.z);
+
+        fc1.transform.LookAt(enemyPosition, new Vector3(0, 1, 0));
+        fc2.transform.LookAt(enemyPosition, new Vector3(0, 1, 0));
+
     }
 
     private void shootAtEnemy()
     {
-        Instantiate(redLaserPrefab, player1.position, Quaternion.identity);
-        Instantiate(blueLaserPrefab, player2.position, Quaternion.identity);
-        SoundManager.Instance.PlayShootClip();
+        float red_laser_x = player1.position.x + 0.2f * (nebula_pos.x - player1.position.x);
+        float red_laser_z = player1.position.z + 0.2f * (nebula_pos.z - player1.position.z);
 
+        float blue_laser_x = player2.position.x + 0.2f * (nebula_pos.x - player2.position.x);
+        float blue_laser_z = player2.position.z + 0.2f * (nebula_pos.x - player2.position.z);
+
+        // RedLaser ----------------------------------------------------------------------------------
+        Vector3 redLaserPosition = new Vector3(red_laser_x, 7.0f, red_laser_z); // parent cannot have y axis position, only child
+        
+        Transform red_trans= redLaserPrefab.transform;
+        red_trans.rotation = player1.transform.rotation;
+        red_trans.transform.Rotate(new Vector3(1,0,0), 90f);
+
+        redLaser = Instantiate(redLaserPrefab, redLaserPosition, red_trans.transform.rotation);
+
+
+        // BlueLaser ---------------------------------------------------------------------------------
+
+        Vector3 blueLaserPosition = new Vector3(blue_laser_x, 7.0f, blue_laser_z); // parent cannot have y axis position, only child
+        
+        Transform blue_trans = blueLaserPrefab.transform;
+        blue_trans.rotation = player2.transform.rotation;
+        blue_trans.transform.Rotate(new Vector3(1, 0, 0), 90f);
+        
+        blueLaser = Instantiate(blueLaserPrefab, blueLaserPosition, blue_trans.transform.rotation);
+
+
+        shooting = true;
+        SoundManager.Instance.PlayShootClip();
+    }
+
+    private void removeEnemy()
+    {
         // los disparos avanzan y paran al llegar a nebula_pos y luego hacemos animación de explosión
-        Destroy(enemy, 5);
+        Destroy(enemy);
         enemyList.Remove(enemy);
-        SoundManager.Instance.PlayShipHitClip();
+        SoundManager.Instance.PlayEnemyHitClip();
+
+        Destroy(redLaser);
+        Destroy(blueLaser);
+
+
+        shooting = false;
     }
 
     private void playersCanMove()

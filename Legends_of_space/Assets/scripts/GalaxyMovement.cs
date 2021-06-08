@@ -24,22 +24,6 @@ public class GalaxyMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if ((x >= 0.0f && x <= 100.0f) && (z >= 0.0f && z <= 100.0f))
-        {
-            x = t.position.x;
-            y = t.position.y;
-            z = t.position.z;
-
-            random = Random.Range(0.0f, 1.0f);
-
-            t.Translate(speed, 0.0f, speed, Space.World);
-        }
-        else
-        {
-           
-        }
-        
-
         t.Rotate(0, 0.5f, 0);
     }
 }
