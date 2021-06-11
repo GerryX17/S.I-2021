@@ -4,12 +4,21 @@ using UnityEngine;
 
 public class AsteroidSpawner : MonoBehaviour
 {
-    public GameObject asteroidsPrefab;
+    public static AsteroidSpawner instance;
+
+    public Asteroid asteroidsPrefab;
     public List<Transform> asteroidsSpawnPositions = new List<Transform>();
+    private List<bool> isSpawnPointOccupied = new List<bool>();
 
-    private List<GameObject> asteroidsList = new List<GameObject>();
+    private List<Asteroid> asteroidsList = new List<Asteroid>();
 
-    public bool canSpawn = true;
+    public bool canSpawn;
+    public int initialAsteroidCount;
+    public int maxCount;
+
+    private int asteroidSpawnCount;
+
+    public int currentNumOfAsteroid;
 
     public float lastTimeAsteroidSpawned;
     public float timeBetweenSpawns;
@@ -17,15 +26,23 @@ public class AsteroidSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //CreateAllAsteroids();
+        instance = this;
+
+        canSpawn = true;
+
+        asteroidSpawnCount = asteroidsSpawnPositions.Count;
+
+        currentNumOfAsteroid = 0;
+
+        initBoolList();
 
         lastTimeAsteroidSpawned = 0.0f;
 
-        for(int i = 0; i < 4; i++)
-        {
-            Transform t = asteroidsSpawnPositions[Random.Range(0, asteroidsSpawnPositions.Count)];
-            GameObject asteroid = SpawnAsteroid(t);
-        }
+        maxCount = 8;
+
+        timeBetweenSpawns = 3.0f;
+
+        fillRandomAsteroids(initialAsteroidCount);
 
         StartCoroutine(spawnRoutine());
     }
@@ -33,50 +50,102 @@ public class AsteroidSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        currentNumOfAsteroid = asteroidsList.Count;
     }
 
     private IEnumerator spawnRoutine()
     {
-        while(canSpawn)
+        while(canSpawn && asteroidsList.Count < maxCount)
         {
-            Transform t = asteroidsSpawnPositions[Random.Range(0, asteroidsSpawnPositions.Count)];
-            GameObject asteroid = SpawnAsteroid(t);
+            int randomPosition = Random.Range(0, asteroidSpawnCount);
+            Asteroid asteroid = SpawnAsteroid(randomPosition);
 
             yield return new WaitForSeconds(timeBetweenSpawns);
         }
     }
 
-    private GameObject SpawnAsteroid(Transform t)
+    private Asteroid SpawnAsteroid(int rand)
     {
-        GameObject asteroid = Instantiate(asteroidsPrefab, t.position, asteroidsPrefab.transform.rotation);
+        Transform t = asteroidsSpawnPositions[rand];
+
+        Asteroid asteroid = Instantiate<Asteroid>(asteroidsPrefab, t.position, asteroidsPrefab.transform.rotation);
+
+        asteroid.id = rand;
+
+        isSpawnPointOccupied[rand] = true;
+
         asteroidsList.Add(asteroid);
 
         return asteroid;
     }
 
-    public void RemoveAsteroidFromList(GameObject asteroid)
+    public void RemoveAsteroid(Asteroid asteroid)
     {
+        isSpawnPointOccupied[asteroid.id] = false;
+
         asteroidsList.Remove(asteroid);
+
+        asteroidsList.TrimExcess();
     }
 
-    public void CreateAllAsteroids() {
-        foreach (Transform t in asteroidsSpawnPositions)
+    public void CreateAllAsteroids() 
+    {
+        for(int i = 0; i < asteroidSpawnCount; i++)
         {
-            // SpawnAsteroid(t);
-            GameObject asteroid = Instantiate(asteroidsPrefab, t.position, asteroidsPrefab.transform.rotation);
-            asteroidsList.Add(asteroid);
+            SpawnAsteroid(i);
+        }
+    }
+
+    private void initBoolList()
+    {
+        for (int i = 0; i < asteroidsSpawnPositions.Count; i++)
+        {
+            isSpawnPointOccupied.Add(false);
         }
     }
 
     public void DestroyAllAsteroids()
         {
-            foreach (GameObject asteroid in asteroidsList)
+            foreach (Asteroid asteroid in asteroidsList)
             {
-                Destroy(asteroid);
+                RemoveAsteroid(asteroid);
             }
+
+            initBoolList();
 
             asteroidsList.Clear();
         }
+
+
+    private int findNextFreeSpawnPoint(int asteroid_n)
+    {
+        List<int> emptySpawnPositions = new List<int>();
+        int index = 0;
+
+        foreach (bool b in isSpawnPointOccupied)
+        {
+            if (b == false)
+                emptySpawnPositions.Add(index);
+            index += 1;
+        }
+
+        return emptySpawnPositions[Random.Range(0, emptySpawnPositions.Count)];
+    }
+
+
+    private void fillRandomAsteroids(int count)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            int asteroid_n = Random.Range(0, asteroidSpawnCount);
+            if(isSpawnPointOccupied[asteroid_n] == true)
+            {
+                findNextFreeSpawnPoint(asteroid_n);
+            }
+            
+            Asteroid asteroid = SpawnAsteroid(asteroid_n);
+        }
+    }
+
 
     }

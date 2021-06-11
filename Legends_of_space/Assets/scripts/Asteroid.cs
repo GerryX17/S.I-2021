@@ -8,6 +8,8 @@ public class Asteroid : MonoBehaviour
     public Transform t;
     public Rigidbody rb;
 
+    public int id = 0;
+
     public float speed;
     public float timeToDestroy;
 
@@ -48,12 +50,11 @@ public class Asteroid : MonoBehaviour
     {
         if( other.CompareTag("Player1") || other.CompareTag("Player2") )
         {
-
             SoundManager.Instance.PlayAsteroidHitClip();
 
             player_forward = other.transform.forward;
 
-            Destroy(this.gameObject, timeToDestroy);
+            AsteroidSpawner.instance.RemoveAsteroid(this);
             isDestroyed = true;
         }
     }

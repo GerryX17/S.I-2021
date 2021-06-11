@@ -15,7 +15,7 @@ public class SoundManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        Instance = this; // 1
+        Instance = this;
         cameraPosition = Camera.main.transform.position;
     }
     public void PlayShootClip()

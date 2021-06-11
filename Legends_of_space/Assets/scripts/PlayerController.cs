@@ -53,10 +53,22 @@ public class PlayerController : MonoBehaviour
         else if (z_offset_absolute > threshold)
             finalDirection = new Vector3(0.0f, 0.0f, verticalInput);
 
-        if ( finalDirection != Vector3.zero )
+        if (finalDirection != Vector3.zero)
         {
-            Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
+            if (finalDirection.x > 0 && finalDirection.z > 0)
+            {
+                Debug.Log("Usando tu quaternion bobo");
+                //Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
+                Quaternion toRotation = Quaternion.LookRotation(Quaternion.Euler(0, 45, 0) * movementDirection, Vector3.up);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
+
+                //Quaternion.Euler(0, 45, 0) * movementDirection
+            }
+            else
+            {
+                Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
+            }
         }
     }
 

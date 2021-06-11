@@ -116,26 +116,31 @@ public class FiducialController : MonoBehaviour
         if (this.m_TuioManager.IsConnected
             && this.m_TuioManager.IsMarkerAlive(this.MarkerID))
         {
-            TUIO.TuioObject marker = this.m_TuioManager.GetMarker(this.MarkerID);
+            if (fighting == false)
+            {
 
-            //update parameters
-            this.m_ScreenPosition.x = marker.getX();
-            this.m_ScreenPosition.y = marker.getY();
-            this.m_Angle = marker.getAngle() * RotationMultiplier;
-            this.m_AngleDegrees = marker.getAngleDegrees() * RotationMultiplier;
-            this.m_Speed = marker.getMotionSpeed();
-            this.m_Acceleration = marker.getMotionAccel();
-            this.m_RotationSpeed = marker.getRotationSpeed() * RotationMultiplier;
-            this.m_RotationAcceleration = marker.getRotationAccel();
-            this.m_Direction.x = marker.getXSpeed();
-            this.m_Direction.y = marker.getYSpeed();
-            this.m_IsVisible = true;
+                TUIO.TuioObject marker = this.m_TuioManager.GetMarker(this.MarkerID);
 
-            //set game object to visible, if it was hidden before
-            ShowGameObject();
+                //update parameters
+                this.m_ScreenPosition.x = marker.getX();
+                this.m_ScreenPosition.y = marker.getY();
+                this.m_Angle = marker.getAngle() * RotationMultiplier;
+                this.m_AngleDegrees = marker.getAngleDegrees() * RotationMultiplier;
+                this.m_Speed = marker.getMotionSpeed();
+                this.m_Acceleration = marker.getMotionAccel();
+                this.m_RotationSpeed = marker.getRotationSpeed() * RotationMultiplier;
+                this.m_RotationAcceleration = marker.getRotationAccel();
+                this.m_Direction.x = marker.getXSpeed();
+                this.m_Direction.y = marker.getYSpeed();
+                this.m_IsVisible = true;
 
-            //update transform component
-            UpdateTransform();
+                //set game object to visible, if it was hidden before
+                ShowGameObject();
+
+                //update transform component
+                UpdateTransform();
+
+            }
         }
         else
         {
@@ -148,6 +153,7 @@ public class FiducialController : MonoBehaviour
             {
                 if (fighting == false)
                 {
+
                     //activate markers
                     transform.GetChild(0).gameObject.SetActive(true);
                     //keyboard commands to test

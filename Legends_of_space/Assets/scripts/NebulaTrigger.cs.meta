@@ -3,7 +3,13 @@ guid: 6e1290da22210de4ab7b03972e3a791f
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - redLaserPrefab: {instanceID: 0}
+  - blueLaserPrefab: {instanceID: 0}
+  - redRB: {instanceID: 0}
+  - blueRB: {fileID: -6297808549458583183, guid: ff81a1464eb38304fa3c4dae075185f2,
+      type: 3}
+  - enemyPrefab: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

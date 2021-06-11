@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 23977691}
   - component: {fileID: 23977692}
   m_Layer: 0
-  m_Name: East Wall
+  m_Name: West Wall
   m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -162,10 +162,10 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 23977690}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 3, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &89240839 stripped
 GameObject:
@@ -645,12 +645,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34a67bfb439d60848b3f5882f5548657, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  random: 0
-  x: 0
-  y: 0
-  z: 0
   t: {fileID: 625074995}
-  speed: 0.01
+  initialSpeed: 10
+  speed: 3
+--- !u!135 &625074997
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 625074992}
+  m_Material: {fileID: 13400000, guid: c222c6724d52a7a469f96de2b5ef7bc6, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 22.712757
+  m_Center: {x: 0.0000019073486, y: 0, z: -0.0000038146973}
+--- !u!54 &625074998
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 625074992}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 4
+  m_CollisionDetection: 1
 --- !u!1 &637812970 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6137497491829922050, guid: a2aaaa094093a294aade9f5a5ce62bbb,
@@ -685,7 +711,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 488912, guid: a0bba650a2f3bc74296aad288c08d469, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 20.1
+      value: 20.7
       objectReference: {fileID: 0}
     - target: {fileID: 488912, guid: a0bba650a2f3bc74296aad288c08d469, type: 3}
       propertyPath: m_LocalPosition.y
@@ -693,7 +719,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 488912, guid: a0bba650a2f3bc74296aad288c08d469, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 41.5
+      value: 71.8
       objectReference: {fileID: 0}
     - target: {fileID: 488912, guid: a0bba650a2f3bc74296aad288c08d469, type: 3}
       propertyPath: m_LocalRotation.x
@@ -798,10 +824,10 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 843599022}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 3, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &964558945
 GameObject:
@@ -1069,7 +1095,7 @@ GameObject:
   - component: {fileID: 1319087783}
   - component: {fileID: 1319087784}
   m_Layer: 0
-  m_Name: Weast Wall
+  m_Name: East Wall
   m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1097,10 +1123,10 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1319087782}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 3, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1343265811
 GameObject:
@@ -1392,7 +1418,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9baf2b4bdb09b74cac5c70b4b20a552, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  asteroidsPrefab: {fileID: 4183341328613001190, guid: f086ae0596257b84d8bf986f669769a9,
+  asteroidsPrefab: {fileID: 5605658638675378065, guid: f086ae0596257b84d8bf986f669769a9,
     type: 3}
   asteroidsSpawnPositions:
   - {fileID: 1138690718}
@@ -1417,8 +1443,11 @@ MonoBehaviour:
   - {fileID: 1237987394}
   - {fileID: 2087450548}
   canSpawn: 0
+  initialAsteroidCount: 3
+  maxCount: 8
+  currentNumOfAsteroid: 0
   lastTimeAsteroidSpawned: 0
-  timeBetweenSpawns: 3
+  timeBetweenSpawns: 4
 --- !u!1 &1592249353
 GameObject:
   m_ObjectHideFlags: 0
@@ -1644,10 +1673,10 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1715300521}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 3, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1732368860
 GameObject:
