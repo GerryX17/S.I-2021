@@ -10,6 +10,7 @@ public class SoundManager : MonoBehaviour
     public AudioClip shootClip;
     public AudioClip enemyHitClip;
     public AudioClip asteroidPushClip;
+    public AudioClip transformClip;
 
     private Vector3 cameraPosition;
     // Start is called before the first frame update
@@ -32,6 +33,11 @@ public class SoundManager : MonoBehaviour
     {
         PlaySound(asteroidPushClip);
     }
+    public void PlayTransformClip()
+    {
+        PlaySound(transformClip);
+    }
+
     private void PlaySound(AudioClip clip)
     {
         AudioSource.PlayClipAtPoint(clip, cameraPosition, 0.4f);

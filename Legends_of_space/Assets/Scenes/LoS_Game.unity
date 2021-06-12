@@ -621,6 +621,53 @@ Transform:
   m_Father: {fileID: 1574840860}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &578821290 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 134156, guid: d45cd38fab4caff4fb282fac230099ff,
+    type: 3}
+  m_PrefabInstance: {fileID: 1788108349}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &578821291
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 578821290}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &625074992 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 127356, guid: a0bba650a2f3bc74296aad288c08d469,
@@ -648,6 +695,12 @@ MonoBehaviour:
   t: {fileID: 625074995}
   initialSpeed: 10
   speed: 3
+  tagPlayer1: Player1
+  tagPlayer2: Player2
+  Tp_Prefab: {fileID: 1919402641469841219, guid: 46c2b22d5eb8cf64e9b284925e0e53eb,
+    type: 3}
+  gold: {fileID: 2100000, guid: ca5b3356f7ec4464282b9fb5fda663c3, type: 2}
+  steel: {fileID: 2100000, guid: 1f57f12ff87977f4d8482639442545cf, type: 2}
 --- !u!135 &625074997
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1838,6 +1891,53 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d45cd38fab4caff4fb282fac230099ff, type: 3}
+--- !u!1 &1796716901 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 185370, guid: a3e9bd2d875ca52428801bc00f70c240,
+    type: 3}
+  m_PrefabInstance: {fileID: 205879131}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &1796716902
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1796716901}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1817274663
 GameObject:
   m_ObjectHideFlags: 0
@@ -2131,6 +2231,7 @@ MonoBehaviour:
   shootClip: {fileID: 8300000, guid: 2913331b88c6f90479f164a520660315, type: 3}
   enemyHitClip: {fileID: 8300000, guid: 6d9d55712b4d36245a71c28635853006, type: 3}
   asteroidPushClip: {fileID: 8300000, guid: 71d8b4d6aed7ddc4bac4587dfb502d60, type: 3}
+  transformClip: {fileID: 8300000, guid: 6c590490dcc6eee45bf95d0c6367a10b, type: 3}
 --- !u!1 &2006488402
 GameObject:
   m_ObjectHideFlags: 0
