@@ -32,7 +32,7 @@ public class GalaxyMovement : MonoBehaviour
     private int numBounces;
     private Vector3 reflection;
 
-
+    Renderer rend;
     // Start is called before the first frame update
     void Start()
     {
@@ -115,8 +115,19 @@ public class GalaxyMovement : MonoBehaviour
         tp_list.Remove(tp_list[0]);
         Destroy(tp_list[0]);
         tp_list.Remove(tp_list[0]);
-        player1.GetComponent<MeshRenderer>().material = steel; //no funciona :(
-        player2.GetComponent<MeshRenderer>().material = gold;
+        // Get the current material applied on the GameObject
+        GameObject p1 = GameObject.FindGameObjectWithTag(tagPlayer1).transform.GetChild(2).gameObject.transform.GetChild(1).gameObject;
+        //Debug.Log(p1.tag);
+        var mat1 = p1.GetComponent<MeshRenderer>().materials;
+        mat1[0] = steel;
+        //Debug.Log(mat1[0]);
+        p1.GetComponent<MeshRenderer>().materials = mat1;
+        GameObject p2 = GameObject.FindGameObjectWithTag(tagPlayer2).transform.GetChild(2).gameObject.transform.GetChild(1).gameObject;
+        var mat2 = p2.GetComponent<MeshRenderer>().materials;
+        Debug.Log(mat2[0]);
+        mat2[0] = gold;
+        Debug.Log(mat2[0]);
+        p2.GetComponent<MeshRenderer>().materials = mat2;
 
     }
 

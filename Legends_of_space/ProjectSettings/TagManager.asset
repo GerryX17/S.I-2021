@@ -24,6 +24,8 @@ TagManager:
   - Asteroid
   - RedPlayer
   - Wall
+  - sp1
+  - sp2
   layers:
   - Default
   - TransparentFX
