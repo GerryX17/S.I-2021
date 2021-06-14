@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class NebulaTrigger : MonoBehaviour
 {
-    private FiducialController fc1;
-    private FiducialController fc2;
+    public FiducialController fc1;
+    public FiducialController fc2;
 
     public string tagPlayer1;
     public string tagPlayer2;
@@ -30,16 +30,13 @@ public class NebulaTrigger : MonoBehaviour
     private GameObject redLaser;
     private GameObject blueLaser;
 
-    public GameObject enemyPrefab; 
-    public List<Transform> enemySpawnPositions = new List<Transform>();
-
-    private GameObject enemy;
-
     public float timeBetweenSpawns;
 
-    private bool hasSpawned = false;
+    private bool arePlayersFighting = false;
 
     private List<GameObject> enemyList = new List<GameObject>();
+
+    private EnemiesSpawner enemySpawner;
 
     private void Start()
     {
@@ -48,42 +45,58 @@ public class NebulaTrigger : MonoBehaviour
 
         GameObject p1 = GameObject.FindGameObjectsWithTag (tagPlayer1)[0];
         player1 = p1.transform;
+        fc1 = p1.GetComponent<FiducialController>();
 
         GameObject p2 = GameObject.FindGameObjectsWithTag(tagPlayer2)[0];
         player2 = p2.transform;
+        fc2 = p2.GetComponent<FiducialController>();
+
+        enemySpawner = EnemiesSpawner.instance;
+
+        StartCoroutine(fightRoutine());
     }
 
     private void Update()
     {
-        
+        // is player 1 within the range of spawning the enenmy or not
         float dist1 = Vector3.Distance(player1.position, nebula_pos);
-        if (dist1 < 30)
+        if (dist1 < 20)
             isPlayer1Close = true;
         else
             isPlayer1Close = false;
 
+        // is player 2 within the range of spawning the enenmy or not
         float dist2 = Vector3.Distance(player2.position, nebula_pos);
-        if (dist2 < 30)
+        if (dist2 < 20)
             isPlayer2Close = true;
         else
             isPlayer2Close = false;
 
-
-        if ( (isPlayer1Close && isPlayer2Close) && !hasSpawned )
+        // if the enemy has not spawned yet and both players are together then spawn the enemy
+        if ( (isPlayer1Close && isPlayer2Close) )
         {
-            hasSpawned = true;
-
-            Invoke( "spawnEnemy", 0.5f);
-
-            Invoke( "lookAtEnemy", 0.5f);
-
-            Invoke( "shootAtEnemy", 1.2f);
-
-            Invoke("removeEnemy", 2.5f);
-
-            Invoke( "playersCanMove", 3.5f);
+            arePlayersFighting = true;
         }
+    }
 
+    private IEnumerator fightRoutine()
+    {
+        while (true) 
+        { 
+            if (arePlayersFighting == true)
+            {
+                yield return new WaitForSeconds(0.2f);
+                spawnEnemy();
+                yield return new WaitForSeconds(0.2f);
+                lookAtEnemy();
+                yield return new WaitForSeconds(0.6f);
+                shootAtEnemy();
+                yield return new WaitForSeconds(1.2f);
+                removeEnemy();
+                yield return new WaitForSeconds(0.5f);
+            }
+        yield return null;
+        }
     }
 
     private void FixedUpdate()
@@ -91,33 +104,28 @@ public class NebulaTrigger : MonoBehaviour
         if (shooting)
         {
             Vector3 enemyPosition = new Vector3(nebula_pos.x, 0.0f, nebula_pos.z);
-            
+
             Vector3 redTargetPosition = enemyPosition - redLaser.transform.position;
-            redLaser.GetComponent<Rigidbody>().AddForce( redTargetPosition * 55 * Time.fixedDeltaTime );
+            redLaser.GetComponent<Rigidbody>().AddForce(redTargetPosition * 55 * Time.fixedDeltaTime);
 
             Vector3 blueTargetPosition = enemyPosition - blueLaser.transform.position;
-            blueLaser.GetComponent<Rigidbody>().AddForce( blueTargetPosition * 55 * Time.fixedDeltaTime );
+            blueLaser.GetComponent<Rigidbody>().AddForce(blueTargetPosition * 55 * Time.fixedDeltaTime);
+
         }
     }
 
     private void spawnEnemy()
     {
-        Vector3 randomPosition = enemySpawnPositions[Random.Range(0, enemySpawnPositions.Count)].position;
-        enemy = Instantiate(enemyPrefab, randomPosition, enemyPrefab.transform.rotation);
-        enemyList.Add(enemy);
+        enemySpawner.canEnemySpawn = true;
     }
 
     private void lookAtEnemy()
     {
         // player1 stop moving
-        GameObject p1 = GameObject.FindGameObjectsWithTag(tagPlayer1)[0];
-        fc1 = p1.GetComponent<FiducialController>();
-        fc1.fighting = true;
+        fc1.doNotMove();
 
         // player2 stop moving
-        GameObject p2 = GameObject.FindGameObjectsWithTag(tagPlayer2)[0];
-        fc2 = p2.GetComponent<FiducialController>();
-        fc2.fighting = true;
+        fc2.doNotMove();
 
         // target is enemy, look at it
         Vector3 enemyPosition = new Vector3(nebula_pos.x, 0.0f, nebula_pos.z);
@@ -163,21 +171,18 @@ public class NebulaTrigger : MonoBehaviour
     private void removeEnemy()
     {
         // los disparos avanzan y paran al llegar a nebula_pos y luego hacemos animación de explosión
-        Destroy(enemy);
-        enemyList.Remove(enemy);
+        enemySpawner.removeEnemy();
+
         SoundManager.Instance.PlayEnemyHitClip();
 
         Destroy(redLaser);
         Destroy(blueLaser);
 
-
         shooting = false;
-    }
 
-    private void playersCanMove()
-    {
-        // both players can move again
-        fc1.fighting = false;
-        fc2.fighting = false;
+        fc1.moveAgain();
+        fc2.moveAgain();
+
+        arePlayersFighting = false;
     }
 }

@@ -29,7 +29,7 @@ using UnityEngine.UI;
 public class FiducialController : MonoBehaviour
 {
     //  OUR ADDITION TO THE CLASS VARIABLES -------------------------------------------
-    public bool fighting = false;
+    private bool fighting = false;
     // --------------------------------------------------------------------------------
 
     public int MarkerID = 0;
@@ -411,6 +411,20 @@ public class FiducialController : MonoBehaviour
             }
         }
     }
+    // ---------------------------------------------------------------------------------------------
+    // Our functions addition
+    public void doNotMove()
+    {
+        fighting = true;
+    }
+
+    public void moveAgain()
+    {
+        fighting = false;
+    }
+    
+    // ---------------------------------------------------------------------------------------------
+
 
     #region Getter
 

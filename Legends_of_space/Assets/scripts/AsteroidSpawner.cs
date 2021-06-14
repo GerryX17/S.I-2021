@@ -23,11 +23,14 @@ public class AsteroidSpawner : MonoBehaviour
     public float lastTimeAsteroidSpawned;
     public float timeBetweenSpawns;
 
+    private void Awake()
+    {
+        instance = this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        instance = this;
-
         canSpawn = true;
 
         asteroidSpawnCount = asteroidsSpawnPositions.Count;
@@ -38,7 +41,7 @@ public class AsteroidSpawner : MonoBehaviour
 
         lastTimeAsteroidSpawned = 0.0f;
 
-        maxCount = 8;
+        maxCount = 0;
 
         timeBetweenSpawns = 3.0f;
 
@@ -58,7 +61,11 @@ public class AsteroidSpawner : MonoBehaviour
         while(canSpawn && asteroidsList.Count < maxCount)
         {
             int randomPosition = Random.Range(0, asteroidSpawnCount);
-            Asteroid asteroid = SpawnAsteroid(randomPosition);
+            if ( isSpawnPointOccupied[randomPosition])
+            {
+                randomPosition = findNextFreeSpawnPoint(randomPosition);
+            }
+            SpawnAsteroid(randomPosition);
 
             yield return new WaitForSeconds(timeBetweenSpawns);
         }
@@ -143,7 +150,7 @@ public class AsteroidSpawner : MonoBehaviour
                 findNextFreeSpawnPoint(asteroid_n);
             }
             
-            Asteroid asteroid = SpawnAsteroid(asteroid_n);
+            SpawnAsteroid(asteroid_n);
         }
     }
 

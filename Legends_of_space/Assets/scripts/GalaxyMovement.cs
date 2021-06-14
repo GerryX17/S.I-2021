@@ -9,7 +9,7 @@ public class GalaxyMovement : MonoBehaviour
     private FiducialController fc2;
 
     public Transform t;
-    private Rigidbody rigidbody;
+    private Rigidbody rb;
 
     public float initialSpeed;
 
@@ -40,7 +40,7 @@ public class GalaxyMovement : MonoBehaviour
 
         numBounces = 1;
 
-        rigidbody = t.GetComponent<Rigidbody>();
+        rb = t.GetComponent<Rigidbody>();
      
         galaxy = GetComponent<Transform>();
 
@@ -51,22 +51,22 @@ public class GalaxyMovement : MonoBehaviour
         player2 = p2.transform;
 
         // first movement until collision
-        rigidbody.velocity += initialMovementDirection * Time.deltaTime * initialSpeed;
+        rb.velocity += initialMovementDirection * Time.deltaTime * initialSpeed;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        t.Rotate(0, 0.5f, 0);
+        t.Rotate(0, 2f, 0);
         galaxy_pos = galaxy.position;
         float dist1 = Vector3.Distance(player1.position, galaxy_pos);
-        if (dist1 < 20)
+        if (dist1 < 12)
             isPlayer1Close = true;
         else
             isPlayer1Close = false;
 
         float dist2 = Vector3.Distance(player2.position, galaxy_pos);
-        if (dist2 < 20)
+        if (dist2 < 12)
             isPlayer2Close = true;
         else
             isPlayer2Close = false;
@@ -90,12 +90,12 @@ public class GalaxyMovement : MonoBehaviour
         // player1 stop moving
         GameObject p1 = GameObject.FindGameObjectsWithTag(tagPlayer1)[0];
         fc1 = p1.GetComponent<FiducialController>();
-        fc1.fighting = true;
+        fc1.doNotMove();
 
         // player2 stop moving
         GameObject p2 = GameObject.FindGameObjectsWithTag(tagPlayer2)[0];
         fc2 = p2.GetComponent<FiducialController>();
-        fc2.fighting = true;
+        fc2.doNotMove();
 
         Vector3 position1 = new Vector3(player1.position.x, player1.position.y, player1.position.z);
         Vector3 position2 = new Vector3(player2.position.x, player2.position.y, player2.position.z);
@@ -134,8 +134,8 @@ public class GalaxyMovement : MonoBehaviour
     private void playersCanMove()
     {
         // both players can move again
-        fc1.fighting = false;
-        fc2.fighting = false;
+        fc1.moveAgain();
+        fc2.moveAgain();
     }
 
     void OnCollisionEnter(Collision collision)
@@ -148,7 +148,7 @@ public class GalaxyMovement : MonoBehaviour
             dot *= 2; // square it up
             reflection = contact.normal * dot; // reflection is normal scaled with the dot product and the forward
             reflection = reflection + transform.forward;
-            rigidbody.velocity = Vector3.MoveTowards(t.position * Time.deltaTime * speed, reflection * Time.deltaTime * speed, 0.05f); 
+            rb.velocity = Vector3.MoveTowards(t.position * Time.deltaTime * speed, reflection * Time.deltaTime * speed, 0.05f); 
             numBounces -= 1;
         }
     }
