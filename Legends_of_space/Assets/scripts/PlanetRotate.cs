@@ -26,7 +26,6 @@ public class PlanetRotate : MonoBehaviour
     private bool arePlayersFighting = false;
     private bool shooting = false;
     //private EnemiesSpawner enemySpawner;
-    private GameObject finalBoss;
 
     // Start is called before the first frame update
     void Start()
@@ -43,7 +42,6 @@ public class PlanetRotate : MonoBehaviour
         player2 = p2.transform;
         fc2 = p2.GetComponent<FiducialController>();
 
-        finalBoss = GetComponent<GameObject>();
         StartCoroutine(fightRoutine());
     }
 
@@ -157,7 +155,7 @@ public class PlanetRotate : MonoBehaviour
     private void removeEnemy()
     {
         // los disparos avanzan y paran al llegar a planet_pos y luego hacemos animación de explosión
-        Destroy(finalBoss);
+        Destroy(gameObject);
 
         SoundManager.Instance.PlayEnemyHitClip();
 
@@ -170,5 +168,7 @@ public class PlanetRotate : MonoBehaviour
         fc2.moveAgain();
 
         arePlayersFighting = false;
+
+        SoundManager.Instance.playBG();
     }
 }

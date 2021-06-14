@@ -1436,7 +1436,7 @@ MonoBehaviour:
   - {fileID: 1039248044}
   - {fileID: 1237987394}
   - {fileID: 2087450548}
-  canSpawn: 0
+  canSpawn: 1
   initialAsteroidCount: 0
   maxCount: 8
   currentNumOfAsteroid: 0

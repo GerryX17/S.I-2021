@@ -61,10 +61,20 @@ public class SoundManager : MonoBehaviour
         AudioSource.PlayClipAtPoint(clip, cameraPosition, 0.4f);
     }
 
+    public void playBG()
+    {
+        finalBossMusic.mute = true;
+        backgroundMusic.mute = false;
+        backgroundMusic.Play();
+
+
+    }
+
     public void playFinalBoss()
     {
 
         backgroundMusic.mute = true;
+        finalBossMusic.mute = false;
         finalBossMusic.Play();
 
     }
