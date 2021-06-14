@@ -41,9 +41,9 @@ public class AsteroidSpawner : MonoBehaviour
 
         lastTimeAsteroidSpawned = 0.0f;
 
-        maxCount = 0;
+        maxCount = 8;
 
-        timeBetweenSpawns = 3.0f;
+        timeBetweenSpawns = 4.0f;
 
         fillRandomAsteroids(initialAsteroidCount);
 
