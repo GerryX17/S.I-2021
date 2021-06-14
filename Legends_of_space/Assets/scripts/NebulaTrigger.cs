@@ -144,7 +144,7 @@ public class NebulaTrigger : MonoBehaviour
         float blue_laser_z = player2.position.z + 0.2f * (nebula_pos.x - player2.position.z);
 
         // RedLaser ----------------------------------------------------------------------------------
-        Vector3 redLaserPosition = new Vector3(red_laser_x, 7.0f, red_laser_z); // parent cannot have y axis position, only child
+        Vector3 redLaserPosition = new Vector3(red_laser_x, 11.0f, red_laser_z); // parent cannot have y axis position, only child
         
         Transform red_trans= redLaserPrefab.transform;
         red_trans.rotation = player1.transform.rotation;
@@ -155,7 +155,7 @@ public class NebulaTrigger : MonoBehaviour
 
         // BlueLaser ---------------------------------------------------------------------------------
 
-        Vector3 blueLaserPosition = new Vector3(blue_laser_x, 7.0f, blue_laser_z); // parent cannot have y axis position, only child
+        Vector3 blueLaserPosition = new Vector3(blue_laser_x, 8.0f, blue_laser_z); // parent cannot have y axis position, only child
         
         Transform blue_trans = blueLaserPrefab.transform;
         blue_trans.rotation = player2.transform.rotation;

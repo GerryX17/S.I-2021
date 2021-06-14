@@ -95,6 +95,10 @@ public class PlanetRotate : MonoBehaviour
                 lookAtEnemy();
                 yield return new WaitForSeconds(0.6f);
                 shootAtEnemy();
+                yield return new WaitForSeconds(0.5f);
+                SoundManager.Instance.PlayShootClip();
+                yield return new WaitForSeconds(0.6f);
+                SoundManager.Instance.PlayShootClip();
                 yield return new WaitForSeconds(1.2f);
                 removeEnemy();
                 yield return new WaitForSeconds(0.5f);
@@ -170,5 +174,9 @@ public class PlanetRotate : MonoBehaviour
         arePlayersFighting = false;
 
         SoundManager.Instance.playBG();
+
+        // restart
+
+        EnemiesSpawner.instance.enemyDeathCount = 0;
     }
 }

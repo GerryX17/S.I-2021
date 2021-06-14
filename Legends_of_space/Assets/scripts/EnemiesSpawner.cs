@@ -61,7 +61,7 @@ public class EnemiesSpawner : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (enemyDeathCount == 5 && triggerLastFight == false)
+        if (enemyDeathCount == 7 && triggerLastFight == false)
         {
             triggerLastFight = true;
             finalFight();
@@ -71,12 +71,12 @@ public class EnemiesSpawner : MonoBehaviour
     private IEnumerator spawnRoutine()
     {
         while (true) { 
-            if ( canNebulaSpawn == true && enemyDeathCount < 5 )
+            if ( canNebulaSpawn == true && enemyDeathCount < 7 )
             {
                 initNebulaEnemy();
             }
 
-            if ( canEnemySpawn == true && enemyDeathCount < 5 )
+            if ( canEnemySpawn == true && enemyDeathCount < 7 )
             {
                 currentEnemy = SpawnEnemy(SpawnID);
                 yield return new WaitForSeconds(timeBetweenSpawns);
