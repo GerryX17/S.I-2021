@@ -95,6 +95,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddd5f3746fde66946b1590b08c18ae2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fc1: {fileID: 0}
+  fc2: {fileID: 0}
+  redLaserPrefab: {fileID: 406743321076758796, guid: a68e88db2e0ea60409afde8308b1d183,
+    type: 3}
+  blueLaserPrefab: {fileID: 4764539825274370455, guid: ff81a1464eb38304fa3c4dae075185f2,
+    type: 3}
+  redRB: {fileID: -5960109929333773265, guid: a68e88db2e0ea60409afde8308b1d183, type: 3}
+  blueRB: {fileID: -6297808549458583183, guid: ff81a1464eb38304fa3c4dae075185f2, type: 3}
+  tagPlayer1: Player1
+  tagPlayer2: Player2
 --- !u!1001 &4915406363620240719
 PrefabInstance:
   m_ObjectHideFlags: 0

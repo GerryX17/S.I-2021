@@ -162,9 +162,8 @@ public class EnemiesSpawner : MonoBehaviour
     {
         Vector3 final_boss_pos = new Vector3( 50f, 11f, 50f);
         GameObject planet = Instantiate(finalBossPrefab, final_boss_pos, finalBossPrefab.transform.rotation);
-        
-        SoundManager sm = SoundManager.Instance;
-        sm.playFBMusic = true;
+
+        SoundManager.Instance.playFinalBoss();
     }
 
 }

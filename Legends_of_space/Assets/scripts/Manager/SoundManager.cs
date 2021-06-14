@@ -30,42 +30,12 @@ public class SoundManager : MonoBehaviour
         AudioSource[] audios = GetComponents<AudioSource>();
 
         backgroundMusic = audios[0];
-        playBGMusic = true;
-        isBGPlaying = false;
+
 
         finalBossMusic = audios[1];
-        playFBMusic = false;
-        isFBPlaying = false;
+
     }
 
-    private void FixedUpdate()
-    {
-        if (playBGMusic == true &&  isBGPlaying == false)
-        {
-            if ( playFBMusic )
-            {
-                playFBMusic = false;
-                isFBPlaying = false;
-                backgroundMusic.mute = false;
-                finalBossMusic.Stop();
-            }
-
-            isBGPlaying = true;
-
-            backgroundMusic.Play();
-        }
-
-        if (playFBMusic == true && isFBPlaying == false)
-        {
-            backgroundMusic.mute = true;
-
-            isBGPlaying = false;
-
-            isFBPlaying = true;
-
-            finalBossMusic.Play();
-        }
-    }
 
     public void PlayShootClip()
     {
@@ -93,6 +63,9 @@ public class SoundManager : MonoBehaviour
 
     public void playFinalBoss()
     {
+
+        backgroundMusic.mute = true;
+        finalBossMusic.Play();
 
     }
 
